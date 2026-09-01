@@ -8,70 +8,52 @@
   </a>
 </p>
 
-# Skills For Real Engineers
+# Skills For Real Engineers: OpenCode Fork
 
-[![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
+> **Fork notice.** This is a fork of [Matt Pocock's `skills`](https://github.com/mattpocock/skills), the original author of these agent skills. All credit for the skill design and content goes to him and his contributors. This fork reorients the set exclusively around **OpenCode** and drops the Claude Code and Codex harness integrations. The install commands below point at this fork, not at the upstream.
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+[![skills.sh](https://skills.sh/b/lucaspiffer16/skills)](https://skills.sh/lucaspiffer16/skills)
+
+Agent skills for real engineering - not vibe coding. Built for **OpenCode** first, installable through [skills.sh](https://skills.sh/lucaspiffer16/skills), and usable by any harness that reads the Agent-Skills convention.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
+These skills are designed to be small, easy to adapt, and composable. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
 
-If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
+If you want to keep up with changes to the original skills, and any new ones Matt creates, join ~60,000 other devs on his newsletter:
 
 [Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
+## Why this fork exists
+
+The upstream ships as a Claude Code plugin and carries Codex per-skill metadata. This fork is **OpenCode-only**:
+
+- It removes the Claude Code plugin, the Codex `agents/openai.yaml` metadata, and the Claude `disable-model-invocation` frontmatter flag.
+- It gates user-invoked skills with OpenCode's `permission.skill` mechanism (`deny` / `ask`) instead.
+- It drops the `CLAUDE.md` steering file entirely: `AGENTS.md` is the single agent-instructions file the set writes to.
+- It routes installation through skills.sh for OpenCode (`.agents/skills`, `~/.config/opencode/skills`), with no native plugin.
+
+The skills themselves are unchanged in spirit: they follow the Agent-Skills `SKILL.md` convention, so they keep working on any harness that reads that convention.
+
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when I ship, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+These skills are built for **OpenCode** first, and install anywhere via **[skills.sh](https://skills.sh/lucaspiffer16/skills)**, which copies editable skill files into your project. You own the files and can hack on them: nothing updates behind your back.
 
 ### 1. Get the skills
 
-<details>
-<summary><strong>Claude Code</strong></summary>
-
 ```bash
-claude plugins install mattpocock-skills
-```
-
-Or, from inside a session:
-
-```
-/plugin install mattpocock-skills
-```
-
-It's in Claude Code's official marketplace, so there's nothing to add first, and updates arrive automatically.
-
-</details>
-
-<details>
-<summary><strong>Codex, and other agents</strong></summary>
-
-```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add lucaspiffer16/skills
 ```
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
 
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
+The skills are Agent-Skills `SKILL.md` files, so they work with any harness that reads that convention (`.agents/skills`, `~/.config/opencode/skills`, and the Agent-Skills standard). The repo ships no Claude Code or Codex integration: skills.sh is the distribution, OpenCode-first. Pull the latest changes whenever you want them with `npx skills update`.
 
-</details>
+### 2. Gate the user-invoked skills in OpenCode (optional)
 
-<details>
-<summary><strong>For tinkerers</strong></summary>
+The user-invoked skills (the ones you type rather than let the model fire) are hidden from the model with `permission.skill: "deny"`. Copy `.agents/opencode.json.example` into your project's `opencode.json` to gate exactly those skills. `system-handbook` is gated `ask`, so the agent proposes it and the human approves before it runs.
 
-Use the same installer, on any agent, including Claude Code:
-
-```bash
-npx skills@latest add mattpocock/skills
-```
-
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
-
-</details>
-
-### 2. Run `/setup-matt-pocock-skills`
+### 3. Run `/setup-matt-pocock-skills`
 
 In your agent, run it once per repo. It will:
 
@@ -79,11 +61,11 @@ In your agent, run it once per repo. It will:
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
 - Ask you where you want to save any docs we create
 
-### 3. Bam - you're ready to go.
+### 4. Bam - you're ready to go.
 
 ## Why These Skills Exist
 
-I built these skills as a way to fix common failure modes I see with Claude Code, Codex, and other coding agents.
+Matt built these skills as a way to fix common failure modes he saw with coding agents. This fork keeps that mission, aimed at OpenCode.
 
 ### #1: The Agent Didn't Do What I Want
 
@@ -100,7 +82,7 @@ This is just the same in the AI age. There is a communication gap between you an
 - [`/grill-me`](./skills/productivity/grill-me/SKILL.md) - for non-code uses
 - [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
 
-These are my most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
+These are the most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
 
 ### #2: The Agent Is Way Too Verbose
 
@@ -110,7 +92,7 @@ These are my most popular skills. They help you align with the agent before you 
 
 **The Problem**: At the start of a project, devs and the people they're building the software for (the domain experts) are usually speaking different languages.
 
-I felt the same tension with my agents. Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
+Matt felt the same tension with his agents. Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
 
 **The Fix** for this is a shared language. It's a document that helps agents decode the jargon used in the project.
 
@@ -119,7 +101,7 @@ I felt the same tension with my agents. Agents are usually dropped into a projec
 Example
 </summary>
 
-Here's an example [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md), from my `course-video-manager` repo. Which one is easier to read?
+Here's an example [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md), from Matt's `course-video-manager` repo. Which one is easier to read?
 
 - **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **AFTER**: "There's a problem with the materialization cascade"
@@ -128,7 +110,7 @@ This concision pays off session after session.
 
 </details>
 
-This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
+This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADRs.
 
 It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
 
@@ -141,7 +123,7 @@ It's hard to explain how powerful this is. It might be the single coolest techni
 
 ### #3: The Code Doesn't Work
 
-> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that’s too big."
+> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that's too big."
 >
 > David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
 
@@ -153,9 +135,9 @@ It's time to look at your feedback loops. Without feedback on how the code it pr
 
 For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
 
-I've built a **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
+Matt built a **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
 
-For debugging, I've also built a **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
+For debugging, there's also a **[`/diagnosing-bugs`](./skills/engineering/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a disciplined loop, gated phase by phase.
 
 ### #4: We Built A Ball Of Mud
 
@@ -175,11 +157,11 @@ This is built in to every layer of these skills:
 
 - [`/to-spec`](./skills/engineering/to-spec/SKILL.md) quizzes you about which modules you're touching before creating a spec
 
-And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. I recommend running it on your codebase once every few days. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
+And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) surveys a codebase for deepening opportunities and hands you the candidates. It is a survey, not a rescue: on a genuinely old codebase it will find real candidates, but it won't untangle the mud for you.
 
 ### Summary
 
-Software engineering fundamentals matter more than ever. These skills are my best effort at condensing these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
+Software engineering fundamentals matter more than ever. These skills are a best effort at condensing these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
 
 ## Reference
 
@@ -187,7 +169,7 @@ These split on one axis: who can invoke them. **User-invoked** skills are reacha
 
 ### Engineering
 
-Skills I use daily for code work.
+Skills used daily for code work.
 
 **User-invoked**
 
@@ -209,7 +191,7 @@ Skills I use daily for code work.
 - **[tdd](./skills/engineering/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
 - **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)**: Actively build and sharpen a project's domain model: challenge terms against the glossary, stress-test with edge-case scenarios, and update `CONTEXT.md` and ADRs inline.
 - **[codebase-design](./skills/engineering/codebase-design/SKILL.md)**: Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
-- **[code-review](./skills/engineering/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
+- **[code-review](./skills/engineering/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's documented coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
 - **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)**: Work through an in-progress git merge or rebase conflict hunk by hunk, resolving by intent traced to each side's primary source, then finish the operation (never `--abort`).
 - **[wizard](./skills/engineering/wizard/SKILL.md)**: Generate an interactive bash wizard that walks a human through steps only they can perform: provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover.
 
@@ -228,4 +210,8 @@ General workflow tools, not code-specific.
 **Model-invoked**
 
 - **[grilling](./skills/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `triage`, `wayfinder` and `improve-codebase-architecture`.
-- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md, and any doc an agent reaches by a pointer.
+
+## Credits
+
+The skills in this repo are the work of [Matt Pocock](https://www.aihero.dev) and the contributors to [mattpocock/skills](https://github.com/mattpocock/skills). This fork adapts the distribution and the invocation model to OpenCode; the skill content remains theirs. License: MIT (see [LICENSE](./LICENSE)).

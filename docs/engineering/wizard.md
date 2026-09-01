@@ -72,9 +72,9 @@ Partly, and less than the launch reactions assumed. It reads the repo before it 
 
 Nowhere in particular. It's a standalone, not a chain step. The common guess is `/grill-with-docs → /to-spec → /wizard`, and that sequence is fine, but the trigger is a manual procedure showing up, which can happen at any point: before you start, mid-build, or long after ship. It also works as a discovery tool: scoping surfaces the hidden prerequisites of a task, like the three API keys you hadn't thought about, before you commit to the work.
 
-**Does it work outside Claude Code?**
+**Does it work across harnesses?**
 
-The artifact does, unconditionally: it's a plain bash script and it doesn't care what [harness](https://www.aihero.dev/ai-coding-dictionary/harness) generated it. The skill itself is model-invoked, so it's listed everywhere: type `/wizard` in Claude Code or `$wizard` in Codex, or just describe the setup you're stuck on. Being model-invoked also keeps it clear of [#693](https://github.com/mattpocock/skills/issues/693), where Claude's desktop and web surfaces drop *user-invoked* skills from the [model](https://www.aihero.dev/ai-coding-dictionary/model)'s listing and report them as not installed.
+The artifact does, unconditionally: it's a plain bash script and it doesn't care what [harness](https://www.aihero.dev/ai-coding-dictionary/harness) generated it. The skill itself is model-invoked, so it's listed everywhere: type `/wizard`, or just describe the setup you're stuck on. Being model-invoked also keeps it clear of [#693](https://github.com/mattpocock/skills/issues/693), where a harness that drops *user-invoked* skills from the [model](https://www.aihero.dev/ai-coding-dictionary/model)'s listing reports them as not installed.
 
 **Didn't this used to be user-invoked?**
 
@@ -82,7 +82,7 @@ It did. It's now model-invoked, so the agent reaches for it unprompted when it h
 
 **It used to be in `in-progress/`: where is it now?**
 
-`engineering/`, as of v1.2. It graduated out of the beta bucket and now ships in the plugin, so it arrives with the rest of the promoted set rather than needing an individual install. Its behaviour didn't change on graduation.
+`engineering/`, as of v1.2. It graduated out of the beta bucket and now ships with the promoted set, so it arrives with the rest of the skills rather than needing an individual install. Its behaviour didn't change on graduation.
 
 ## It's working if
 
