@@ -11,7 +11,7 @@ Type `/code-review`, or the agent reaches for it automatically when you ask to r
 | Your situation | Reach for |
 | --- | --- |
 | A diff exists and you want to know if it is built right *and* is the right thing | `code-review` |
-| You want bugs hunted in the diff: null paths, races, off-by-one | Claude Code's own built-in review, not this one (see the name clash below) |
+| You want bugs hunted in the diff: null paths, races, off-by-one | A bug-hunting review pass, not this one: this skill checks spec compliance and standards, not raw defects |
 | Nothing is written yet and you want it written test-first | [tdd](https://aihero.dev/skills-tdd) |
 | A whole spec needs building, review included | [implement](https://aihero.dev/skills-implement), which calls this skill itself |
 | The whole codebase has drifted, not one diff | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
@@ -47,9 +47,9 @@ The **smell baseline** is the floor underneath it, twelve Fowler code smells fro
 
 ## Common questions
 
-**It collides with Claude Code's own `/code-review`. What do I do?**
+**What is the difference between this and a bug-hunting review?**
 
-This is the most reported problem with the skill, and it is not fixed. Claude Code ships its own `/code-review`, which does something different: it hunts bugs in the diff, where this one checks spec compliance and repo standards. Installing this library in Claude Code means one of them wins, and which one wins depends on how you installed: via a plain skills install, the local file wins and this skill shadows the built-in. One clean answer is to remove Claude Code's built-in skills entirely: a large [context](https://www.aihero.dev/ai-coding-dictionary/context) saving, and the collision stops mattering. The shadowing itself is arguably a Claude Code [harness](https://www.aihero.dev/ai-coding-dictionary/harness) bug (a skill author should be free to name a skill anything), so the other answer is to rename the local copy. Editing the frontmatter or renaming the directory gets undone by `npx skills update`; the durable workaround reported by users is to fork the skill to a new name and drop `code-review` from the managed set, keeping a note of the commit you forked from so you can re-sync by hand. In OpenCode the name is yours alone: nothing built-in collides.
+This skill checks two axes: **Standards** (does the code follow the repo's documented coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue or spec?). It is not a defect hunt: null paths, races, and off-by-one errors are better caught by a focused bug-hunting pass over the diff. The two are complementary, and both can run on the same change; this one's job is compliance and intent, not raw correctness.
 
 **Its sub-agents keep invoking `/code-review` again and spawn more agents.**
 

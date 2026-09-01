@@ -40,4 +40,4 @@ The user-invoked skills (the ones you reach by typing `/skill-name` rather than 
 
 ## Not the install story
 
-There is no plugin. The old Claude Code plugin (`.claude-plugin/`) was removed when the set went OpenCode-first; see [.agents/adr/0002-ship-as-an-opencode-first-skill-set.md](./.agents/adr/0002-ship-as-an-opencode-first-skill-set.md). Skills still install and run in Claude Code and Codex through skills.sh, which is harness-neutral.
+There is no plugin. The old Claude Code plugin (`.claude-plugin/`) was removed when the set went OpenCode-first; see [.agents/adr/0002-ship-as-an-opencode-first-skill-set.md](./.agents/adr/0002-ship-as-an-opencode-first-skill-set.md). The skills are OpenCode-first: the repo ships no Claude Code or Codex integration, and skills.sh is the distribution for OpenCode and any other Agent-Skills harness.

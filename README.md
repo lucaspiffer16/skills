@@ -34,7 +34,7 @@ npx skills@latest add mattpocock/skills
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
 
-The skills are Agent-Skills `SKILL.md` files, so they work with any harness that reads that convention: OpenCode (`.agents/skills`, `~/.config/opencode/skills`), Claude Code, Codex, and 70+ others. There is no plugin: skills.sh is the distribution, OpenCode-first. See [`.agents/adr/0002-ship-as-an-opencode-first-skill-set.md`](./.agents/adr/0002-ship-as-an-opencode-first-skill-set.md). Pull my latest changes whenever you want them with `npx skills update`.
+The skills are Agent-Skills `SKILL.md` files, so they work with any harness that reads that convention (`.agents/skills`, `~/.config/opencode/skills`, and the Agent-Skills standard). The repo ships no Claude Code or Codex integration: skills.sh is the distribution, OpenCode-first. See [`.agents/adr/0002-ship-as-an-opencode-first-skill-set.md`](./.agents/adr/0002-ship-as-an-opencode-first-skill-set.md). Pull my latest changes whenever you want them with `npx skills update`.
 
 ### 2. Gate the user-invoked skills in OpenCode (optional)
 
@@ -52,7 +52,7 @@ In your agent, run it once per repo. It will:
 
 ## Why These Skills Exist
 
-I built these skills as a way to fix common failure modes I see with OpenCode, Claude Code, Codex, and other coding agents.
+I built these skills as a way to fix common failure modes I see with OpenCode and other coding agents.
 
 ### #1: The Agent Didn't Do What I Want
 
@@ -197,4 +197,4 @@ General workflow tools, not code-specific.
 **Model-invoked**
 
 - **[grilling](./skills/productivity/grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved. The reusable interview primitive behind `grill-me`, `grill-with-docs`, `triage`, `wayfinder` and `improve-codebase-architecture`.
-- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+- **[writing-for-agents](./skills/productivity/writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md, and any doc an agent reaches by a pointer.

@@ -79,9 +79,9 @@ Partly. It is strong on big existing codebases lacking consistent structure, and
 
 Rarely, and you should know that going in. The skill is built to output findings, so the framing pushes it toward producing candidates rather than concluding that nothing is wrong. The strength badges are the defence: a report where everything is `Speculative` is the skill telling you it found nothing, in the only way it knows how.
 
-**Does it work in Codex or another harness?**
+**Does it work across harnesses?**
 
-Partially. The exploration step names Claude Code's `Agent` tool with `subagent_type=Explore` directly, so a [harness](https://www.aihero.dev/ai-coding-dictionary/harness) without that tool may skip the parallel exploration rather than substitute its own. The skill still runs; the scan is just less thorough. A harness-neutral rewrite has been proposed but is not merged.
+Partially. The exploration step names one [harness](https://www.aihero.dev/ai-coding-dictionary/harness)'s `Agent` tool with `subagent_type=Explore` directly, so a harness without that tool may skip the parallel exploration rather than substitute its own. The skill still runs; the scan is just less thorough. A harness-neutral rewrite has been proposed but is not merged.
 
 **How do I actually implement deep modules in TypeScript?**
 
