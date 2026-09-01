@@ -11,6 +11,7 @@ The project must remain simple. Do **not** create a CLI, server, database, custo
 
 This skill builds the handbook; the other skills maintain it afterwards:
 
+- **`system-handbook-maintain`** is the model-invoked counterpart that keeps the handbook in sync as the code evolves: it updates `workspace.dsl`, module docs, and behavior docs when implementation changes them, and delegates glossary/ADR work to `domain-modeling`.
 - **`domain-modeling`** writes and sharpens the glossary and ADRs once the handbook exists. Point it at the handbook homes (`docs/01-domain/glossary.md`, `docs/03-architecture/decisions/`) through the repo's `docs/agents/domain.md` when it exists, or an `AGENTS.md` pointer.
 - **`grill-with-docs`** closes the unknowns this setup marks "Unknown / Requires clarification".
 - **`to-spec`** keeps publishing specs to the issue tracker (the working surface); the handbook holds the durable record.
