@@ -2,7 +2,7 @@
 
 One install story, one wording. `README.md`, `.changeset/*`, and every page under `docs/` must say **this** and nothing else. Change it here first, then propagate.
 
-`mattpocock-skills` is distributed as **editable skill files**, copied into your project by [skills.sh](https://skills.sh/mattpocock/skills) (`npx skills add mattpocock/skills`). There is no plugin: you own the files and can hack on them. The skills work with **OpenCode** out of the box, because OpenCode reads `.agents/skills` and `~/.config/opencode/skills`, both of which skills.sh writes to.
+`lucaspiffer16/skills` is distributed as **editable skill files**, copied into your project by [skills.sh](https://skills.sh/lucaspiffer16/skills) (`npx skills add lucaspiffer16/skills`). There is no plugin: you own the files and can hack on them. The skills work with **OpenCode** out of the box, because OpenCode reads `.agents/skills` and `~/.config/opencode/skills`, both of which skills.sh writes to.
 
 ## OpenCode, and other agents: skills.sh
 
@@ -11,7 +11,7 @@ Use the whole-set form on `README.md`:
 <canonical-block name="skills-sh-whole-set">
 
 ```bash
-npx skills@latest add mattpocock/skills
+npx skills@latest add lucaspiffer16/skills
 ```
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take: make sure `setup-matt-pocock-skills` is one of them.**
@@ -23,7 +23,7 @@ Pick the skills you want, and which coding agents to install them on. **The inst
 <canonical-block name="skills-sh-one-skill">
 
 ```bash
-npx skills@latest add mattpocock/skills --skill=<name>
+npx skills@latest add lucaspiffer16/skills --skill=<name>
 ```
 
 ```bash
