@@ -2,29 +2,11 @@
 
 One install story, one wording. `README.md`, `.changeset/*`, and every page under `docs/` must say **this** and nothing else. Change it here first, then propagate.
 
-`mattpocock-skills` is listed in **Claude Code's official marketplace** (configured name `claude-plugins-official`, source repo `anthropics/claude-plugins-official`), which every Claude Code install has out of the box. There is no marketplace to add first. Official Anthropic marketplaces have auto-update enabled by default ([discover-plugins](https://code.claude.com/docs/en/discover-plugins)), so "updates arrive automatically" is a true claim, not a hope.
+`mattpocock-skills` is distributed as **editable skill files**, copied into your project by [skills.sh](https://skills.sh/mattpocock/skills) (`npx skills add mattpocock/skills`). There is no plugin: you own the files and can hack on them. The skills work with **OpenCode** out of the box, because OpenCode reads `.agents/skills` and `~/.config/opencode/skills`, both of which skills.sh writes to.
 
-## Claude Code: the plugin
+## OpenCode, and other agents: skills.sh
 
-<canonical-block name="claude-code">
-
-```bash
-claude plugins install mattpocock-skills
-```
-
-Or, from inside a session:
-
-```
-/plugin install mattpocock-skills
-```
-
-It's in Claude Code's official marketplace, so there's nothing to add first, and updates arrive automatically.
-
-</canonical-block>
-
-## Codex, and other agents: skills.sh
-
-The plugin is Claude Code only. Everywhere else, [skills.sh](https://skills.sh/mattpocock/skills) copies editable skill files into the project. Use the whole-set form on `README.md`:
+Use the whole-set form on `README.md`:
 
 <canonical-block name="skills-sh-whole-set">
 
@@ -52,10 +34,10 @@ npx skills@latest update <name>
 
 `skills@latest` is the pinned spelling in all three. The pages under `docs/` used to carry their own copy of these commands; those blocks are now deleted rather than corrected, because the site renders the install commands itself.
 
-## The two routes are exclusive
+## User-invoked skills in OpenCode
 
-The plugin is a managed, read-only bundle you subscribe to. skills.sh writes files you own and edit. Installing both leaves the user with every skill twice: always say "pick one".
+The user-invoked skills (the ones you reach by typing `/skill-name` rather than letting the model fire them) are hidden from the model with `permission.skill: "deny"`. A ready-to-go config ships at `.agents/opencode.json.example`; copy it into your project's `opencode.json` to gate exactly those skills.
 
 ## Not the install story
 
-`.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (`/plugin marketplace add mattpocock/skills`, then `/plugin install mattpocock-skills@mattpocock`). The official listing supersedes it. It is kept as a fallback for installing the repo directly (an unreleased commit, or a fork), and is **not** documented to users.
+There is no plugin. The old Claude Code plugin (`.claude-plugin/`) was removed when the set went OpenCode-first; see [.agents/adr/0002-ship-as-an-opencode-first-skill-set.md](./.agents/adr/0002-ship-as-an-opencode-first-skill-set.md). Skills still install and run in Claude Code and Codex through skills.sh, which is harness-neutral.
