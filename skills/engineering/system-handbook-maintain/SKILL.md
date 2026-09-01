@@ -3,7 +3,7 @@ name: system-handbook-maintain
 description: Keep the project's System Engineering Handbook in sync with the code as it evolves. Use when you make changes that affect architecture, modules, integrations, data ownership, reliability, security, or documented behavior, and the repo has a System Handbook (docs/README.md).
 ---
 
-Maintain the project's **System Engineering Handbook** so it stays an accurate source of system intent as the code evolves. This is the model-invoked maintenance counterpart to `/system-handbook` (the user-invoked skill that builds the handbook once). You reach for this automatically whenever your work changes something the handbook documents.
+Maintain the project's **System Engineering Handbook** so it stays an accurate source of system intent as the code evolves. This is the model-invoked maintenance counterpart to `/system-handbook` (also model-invoked, gated `ask` in OpenCode, so the human approves before it builds). You reach for this automatically whenever your work changes something the handbook documents.
 
 Call the Skill tool with "domain-modeling" when the change touches **domain vocabulary or a hard-to-reverse decision**: `domain-modeling` owns the glossary (`docs/01-domain/glossary.md`) and the ADRs (`docs/03-architecture/decisions/`). Do not duplicate its job here.
 

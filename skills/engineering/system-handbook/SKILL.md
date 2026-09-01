@@ -1,6 +1,6 @@
 ---
 name: system-handbook
-description: Build a System Engineering Handbook in the current project: audit the codebase, scaffold the docs tree, model the architecture in Structurizr, write ADRs and the glossary, and wire it into AGENTS.md.
+description: Build or rebuild a System Engineering Handbook in the current project. Use when the user asks for a handbook, a docs-first system overview, or architecture documentation, or when the engineering setup just ran (setup-matt-pocock-skills) and no docs/README.md exists yet. Audits the codebase, scaffolds the docs tree, models the architecture in Structurizr, writes ADRs and the glossary, and wires it into AGENTS.md.
 ---
 
 Build a documentation-first **System Engineering Handbook** in the existing project you are working in. It becomes the persistent source of system intent and architectural context for future AI-assisted development. Run it once per repo, like `/setup-matt-pocock-skills`.

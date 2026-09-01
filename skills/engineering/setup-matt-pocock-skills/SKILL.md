@@ -110,3 +110,5 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 ### 5. Done
 
 Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later; re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+
+If the repo has no System Handbook (no `docs/README.md`), offer to build one next: call the Skill tool with "system-handbook". It is the standing-knowledge counterpart to this setup, and the user can approve or decline it (in OpenCode it is gated `ask`, so the human confirms before it runs).

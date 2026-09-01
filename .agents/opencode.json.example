@@ -8,7 +8,7 @@
       "implement": "deny",
       "improve-codebase-architecture": "deny",
       "setup-matt-pocock-skills": "deny",
-      "system-handbook": "deny",
+      "system-handbook": "ask",
       "to-spec": "deny",
       "to-tickets": "deny",
       "triage": "deny",

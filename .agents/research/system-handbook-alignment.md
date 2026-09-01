@@ -1,5 +1,7 @@
 # System Engineering Handbook: alignment with the Matt Pocock skills
 
+> **Update, 2026-09-01:** section 6 originally proposed `system-handbook` as a user-invoked orchestrator gated `deny`. It is instead shipped **model-invoked, gated `ask`** in OpenCode: model-invoked so `setup-matt-pocock-skills` can chain to it (a user-invoked skill cannot be called by another user-invoked skill), and `ask` so the human approves the high-blast-radius run before it executes. A separate model-invoked `system-handbook-maintain` skill keeps the handbook in sync afterwards. This document otherwise stands as the design record.
+
 Research date: 2026-09-01. This document aligns the "System Engineering Handbook" proposal (a Markdown `docs/` tree, Structurizr C4 model, ADRs, Obsidian vault, AGENTS.md integration) with the existing skill set in this repo, so it can be delivered "integrating with the current pattern": as a skill, reusing the conventions the repo already owns.
 
 ## 1. What the proposal is
