@@ -87,3 +87,5 @@ Off the main flow entirely.
 ## Precondition
 
 **`/setup-matt-pocock-skills`**: run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
+
+**`/system-handbook`**: run once when you want the project's architecture and system intent written down as a durable handbook (`docs/`), modeled in Structurizr, with glossary and ADRs wired into `AGENTS.md`. It is the standing-knowledge counterpart to `/setup-matt-pocock-skills`, and the setup skill offers it automatically when the repo has no handbook yet. In OpenCode it is gated `ask`, so the model proposes it and the human approves before it runs. After it runs, **`/system-handbook-maintain`** (model-invoked) keeps the handbook in sync as the code evolves, while `domain-modeling`, `to-spec`, `research`, and `improve-codebase-architecture` maintain what it created.

@@ -1,0 +1,12 @@
+---
+"mattpocock-skills": minor
+---
+
+Add the **`system-handbook`** skill (engineering, model-invoked, gated `ask` in OpenCode): builds a documentation-first System Engineering Handbook in an existing project. It audits the repo, scaffolds a `docs/` tree across System, Domain, Product, Architecture, Engineering and Operations, models the current architecture in a Structurizr C4 `workspace.dsl`, writes the glossary and ADRs, and wires everything into `AGENTS.md` (and `CONTEXT.md` where used). The `docs/` tree opens as an Obsidian vault with no configuration.
+
+- Composes with the existing skills instead of duplicating them: `domain-modeling` keeps the glossary and ADRs sharp (re-homed to `docs/01-domain/glossary.md` and `docs/03-architecture/decisions/`), `to-spec` stays the working-spec surface, `research` fills gaps, `improve-codebase-architecture` feeds the model.
+- Carries a Structurizr-compatible ADR template (`NNNN-slug.md`, `# NNNN. Title` / `Date:` / `## Status` / `## Context`) so the `!adrs` directive imports the record, and a minimal `workspace.dsl` seed.
+- Model-invoked so it chains right after `setup-matt-pocock-skills`: the setup skill now calls the Skill tool with `system-handbook` when the repo has no handbook yet. In OpenCode it is gated `permission.skill."system-handbook": "ask"` in `.agents/opencode.json.example`, so the model proposes the handbook and the human approves before it runs.
+- Routed in `ask-matt` under Precondition, listed in the top-level and Engineering READMEs (Model-invoked), with a docs page at `docs/engineering/system-handbook.md`.
+
+Also add the **`system-handbook-maintain`** skill (engineering, model-invoked): the ongoing maintenance counterpart that keeps the handbook in sync as the code evolves. It updates `workspace.dsl`, module docs, and behavior docs when implementation changes them, and delegates glossary and ADR work to `domain-modeling` so there stays a single glossary and ADR record. Gated like the other model-invoked skills (no `permission.skill` entry), reached by the agent automatically when a change touches documented architecture or behavior, or by typing `/system-handbook-maintain`. Listed in the top-level and Engineering READMEs with a docs page at `docs/engineering/system-handbook-maintain.md`.

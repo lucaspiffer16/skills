@@ -1,0 +1,50 @@
+workspace {
+
+    model {
+        // People
+        user = person "User" "A person who uses the system"
+
+        // Software systems and containers
+        api = softwareSystem "API" "The main application" {
+            web = container "Web App" "Serves the UI"
+            apiContainer = container "API" "Handles business logic"
+            db = container "Database Schema" "Stores data" {
+                tags "Database"
+            }
+            worker = container "Worker" "Processes background jobs"
+        }
+
+        // External systems
+        external = softwareSystem "External Service" "A third-party integration"
+
+        // Relationships
+        user -> api "Uses"
+        web -> apiContainer "Makes API calls to"
+        apiContainer -> db "Reads from and writes to"
+        apiContainer -> external "Calls"
+        worker -> db "Reads from and writes to"
+    }
+
+    views {
+        systemContext api {
+            include *
+            autolayout lr
+        }
+
+        container api {
+            include *
+            autolayout lr
+        }
+
+        theme default
+    }
+
+    // Attach the handbook Markdown and ADRs to the API system.
+    documentation {
+        api !docs docs
+    }
+
+    adrs {
+        api !adrs docs/03-architecture/decisions
+    }
+}
