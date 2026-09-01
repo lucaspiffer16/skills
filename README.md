@@ -35,6 +35,28 @@ The upstream ships as a Claude Code plugin and carries Codex per-skill metadata.
 
 The skills themselves are unchanged in spirit: they follow the Agent-Skills `SKILL.md` convention, so they keep working on any harness that reads that convention.
 
+## The System Engineering Handbook
+
+The second reason this fork exists is the **System Engineering Handbook**: a documentation-first practice that makes a project's architecture and intent a persistent, machine-readable knowledge base before any implementation happens. The engineering skills in the upstream set document *during* the work (`grill-with-docs` writes `CONTEXT.md` and ADRs, `to-spec` writes specs). This fork adds a pair of skills that make the system's knowledge exist *up front* and stay alive afterwards.
+
+### How it works
+
+- **`/system-handbook`** (model-invoked, gated `ask` in OpenCode) builds the handbook in an existing project in one pass: it audits the repository, scaffolds a `docs/` tree across System, Domain, Product, Architecture, Engineering and Operations, models the current architecture in a Structurizr C4 `workspace.dsl`, writes the glossary and ADRs, and wires everything into `AGENTS.md` (and `CONTEXT.md` where the project uses one). The whole `docs/` tree opens as an Obsidian vault with no configuration.
+- **`/system-handbook-maintain`** (model-invoked) keeps the handbook in sync as the code evolves: when implementation changes architecture, modules, integrations, data ownership, reliability, security, or documented behavior, it updates `workspace.dsl`, module docs, and behavior docs, and delegates glossary and ADR work to `domain-modeling` so there stays a single glossary and a single ADR record.
+
+### Where the lifecycle runs
+
+The handbook follows the software lifecycle: Discovery → Domain → Requirements → Product → Architecture → Architecture Decisions → Specification → Implementation → Testing → Operations → Evolution. The handbook holds the persistent knowledge through the whole loop; Structurizr holds the architectural model; Markdown holds the human- and agent-readable knowledge; Obsidian provides the exploration interface; `AGENTS.md` connects the repository knowledge to agents. The skills provide the engineering execution.
+
+The part that makes it more than a snapshot is the **documentation-drift clause** written into `AGENTS.md`: when implementation changes domain behavior, business rules, architectural boundaries, integrations, data ownership, or reliability and security behavior, the relevant documentation must be reviewed and updated. That is what `system-handbook-maintain` enforces.
+
+### How it composes, not duplicates
+
+- **One glossary.** The glossary lives in `docs/01-domain/glossary.md`; `CONTEXT.md` becomes a concise pointer to the handbook, not a second copy.
+- **One ADR record.** ADRs live in `docs/03-architecture/decisions/`, in a format Structurizr's `!adrs` imports, reusing `domain-modeling`'s bar for when an ADR is worth writing.
+- **Specs stay on the tracker.** `to-spec` keeps publishing working specs to the issue tracker; the handbook holds the durable record.
+- **Two AGENTS.md blocks.** `setup-matt-pocock-skills` owns the `## Agent skills` block; the handbook owns its own `## System Handbook` section.
+
 ## Installation (30-second setup)
 
 These skills are built for **OpenCode** first, and install anywhere via **[skills.sh](https://skills.sh/lucaspiffer16/skills)**, which copies editable skill files into your project. You own the files and can hack on them: nothing updates behind your back.
@@ -60,6 +82,8 @@ In your agent, run it once per repo. It will:
 - Ask you which issue tracker you want to use (GitHub, Linear, or local files)
 - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
 - Ask you where you want to save any docs we create
+
+When setup completes, the agent offers **`/system-handbook`** to build the System Engineering Handbook (gated `ask`, so you approve before it runs). Accept it if you want the architecture, domain language, and decisions written down up front.
 
 ### 4. Bam - you're ready to go.
 
